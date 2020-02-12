@@ -3,8 +3,8 @@ package co.edu.unal.ce.codeAC;
 public class CROX1 implements Crossover<Integer[]> {
 
     @Override
-    public Integer[][] apply(Integer[][] parents) {
-        int n = parents[0].length;
+    public Integer[][] apply(Individual<Integer[]>[] parents) {
+        int n = parents[0].x().length;
         int i = (int)(Math.random() * n-1);
         int l = (int)(Math.random() * (n-i));
         //System.out.println("i: "+i+ " l: "+l);
@@ -12,25 +12,25 @@ public class CROX1 implements Crossover<Integer[]> {
         int j = 0;
         for (int k = 0; k < n; k++){
             if(k<l){
-                children[0][k+i] = parents[0][k+i];
+                children[0][k+i] = parents[0].x()[k+i];
                 j = (i+k+1)%n;
             }else{
-                while (inArray(children[0], parents[1][j])){
+                while (inArray(children[0], parents[1].x()[j])){
                     j = (j+1)%n;
                 }
-                children[0][(k+i)%n] = parents[1][j];
+                children[0][(k+i)%n] = parents[1].x()[j];
             }
         }
         j = (l+1)%n;
         for (int k = 0; k < n; k++){
             if(k<l){
-                children[1][k+i] = parents[1][k+i];
-
+                children[1][k+i] = parents[1].x()[k+i];
+                j = (i+k+1)%n;
             }else{
-                while (inArray(children[1], parents[0][j])){
+                while (inArray(children[1], parents[0].x()[j])){
                     j = (j+1)%n;
                 }
-                children[1][(k+i)%n] = parents[0][j];
+                children[1][(k+i)%n] = parents[0].x()[j];
             }
         }
         return children;

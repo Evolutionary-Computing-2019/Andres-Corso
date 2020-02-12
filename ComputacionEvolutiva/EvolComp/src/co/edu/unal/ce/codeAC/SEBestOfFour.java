@@ -1,7 +1,7 @@
 package co.edu.unal.ce.codeAC;
 
 public class SEBestOfFour<T> implements Selection<T> {
-    protected Individual<T> selBestOfFour(Individual<T>[] pop){
+    private Individual<T> selBestOfFour(Individual<T>[] pop){
         Individual<T> best = pop[(int)(pop.length*Math.random())];
         for(int i=1; i<=3; i++ ){
             Individual<T> comp = pop[(int)(pop.length*Math.random())];

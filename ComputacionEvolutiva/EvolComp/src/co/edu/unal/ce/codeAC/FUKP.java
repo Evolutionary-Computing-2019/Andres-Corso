@@ -45,7 +45,7 @@ public class FUKP implements Function<Boolean[]> {
                 if (weight > maxW){
                     //fitness = 0;
                     //fitness = -100 * maxW;
-                    return 0;
+                    return (weight-maxW);
                 }
             }
         }

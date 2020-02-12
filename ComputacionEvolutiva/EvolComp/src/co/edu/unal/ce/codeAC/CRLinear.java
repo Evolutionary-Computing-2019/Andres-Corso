@@ -1,12 +1,14 @@
 package co.edu.unal.ce.codeAC;
 
-public class CRLinear implements Crossover<Double> {
+public class CRLinear implements Crossover<Double[]> {
     @Override
-    public Double[] apply(Double[] parents) {
-        Double[] children = new Double[2];
+    public Double[][] apply(Individual<Double[]>[] parents) {
+        Double[][] children = new Double[2][];
         double alpha = Math.random();
-        children[0] = alpha*parents[0] + (1.0-alpha)*parents[1];
-        children[1] = alpha*parents[1] + (1.0-alpha)*parents[0];
+        for (int i = 0; i< parents[0].x().length; i++){
+            children[0][i] = alpha*parents[0].x()[i] + (1.0-alpha)*parents[1].x()[i];
+            children[1][i] = alpha*parents[1].x()[i] + (1.0-alpha)*parents[0].x()[i];
+        }
         return children;
     }
 }

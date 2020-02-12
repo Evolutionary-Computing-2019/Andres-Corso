@@ -1,5 +1,6 @@
 package co.edu.unal.ce.codeAC;
 
+import javax.swing.text.StyledEditorKit;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -24,7 +25,7 @@ public class ALGPopulationBased<T> {
         this.bests = new ArrayList<Double>();
     }
 
-    public Individual<T>[] startPop(int n ){
+    private Individual<T>[] startPop(int n){
         @SuppressWarnings("unchecked")
         Individual<T>[] p = new Individual[n];
         for( int i=0; i<n; i++ ){
@@ -35,14 +36,14 @@ public class ALGPopulationBased<T> {
         return p;
     }
 
-    protected Individual<T> best(Individual<T>[] pop){
+    private Individual<T> best(Individual<T>[] pop){
         Individual<T> bestI = pop[0];
         for( int i=1; i<pop.length; i++)
             if( bestI.f() > pop[i].f() ) bestI = pop[i];
         return bestI;
     }
 
-    public void statistics( int k, Individual<T> bestI){
+    private void statistics(int k, Individual<T> bestI){
         if (printBest) System.out.println(k+" "+bestI.f()+":"+bestI);
     }
 
@@ -52,28 +53,12 @@ public class ALGPopulationBased<T> {
         Individual<T> bestI = best(pop);
         statistics(0, bestI);
         for( int i=1; i<=iters; i++){
-            Individual<T>[] parents = s.get(pop, n);
             @SuppressWarnings("unchecked")
             Individual<T>[] children = new Individual[n];
             for( int k=0; k<n; k+=2){
-                /*TODO: Cambiar cada vez*/
-                /*Double
-                Double[] parentsCR =  new Double[2];
-                parentsCR[0] = (Double) parents[k].x();
-                parentsCR[1] = (Double) parents[k + 1].x();
-                */
-                /*Boolean[]
-                Boolean[][] parentsCR =  new Boolean[2][];
-                parentsCR[0] = (Boolean[]) parents[k].x();
-                parentsCR[1] = (Boolean[]) parents[k + 1].x();
-                */
-                /*Integer[]*/
-                Integer[][] parentsCR =  new Integer[2][];
-                parentsCR[0] = (Integer[]) parents[k].x();
-                parentsCR[1] = (Integer[]) parents[k + 1].x();
-                /**/
+                Individual<T>[] parents = s.get(pop, 2);
 
-                T[] created = c.apply((T[])parentsCR);
+                T[] created = c.apply(parents);
 
                 created[0] = e.repair(m.apply(created[0]));
                 created[1] = e.repair(m.apply(created[1]));

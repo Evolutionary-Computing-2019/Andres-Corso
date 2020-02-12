@@ -8,7 +8,7 @@ public class Example {
         //Mutation<Double> m = new MUUniform();
         Mutation<Double> m = new MUGaussian();
         Space<Double> e = new SPInterval(-10,10);
-        Replace<Double> r = new REHIllClimbing<>();
+        Replace<Double> r = new REBestPop1vsCh1<>();
         ALGLocal<Double> ac = new ALGLocal<Double>(r, e, f, m);
         Individual<Double> x = ac.apply(1000);
         System.out.println("Local gets:"+x+" "+x.f());
@@ -18,7 +18,7 @@ public class Example {
         Function<Double> f = new FUQuadratic();
         //Mutation<Double> m = new MUUniform();
         Mutation<Double> m = new MUGaussian();
-        Crossover<Double> c = new CRLinear();
+        Crossover<Double> c = new CRLinearSingle();
         Space<Double> e = new SPInterval(-10,10);
         Replace<Double> r = new REGenerational<Double>();
         Selection<Double> s = new SEBestOfFour<Double>();

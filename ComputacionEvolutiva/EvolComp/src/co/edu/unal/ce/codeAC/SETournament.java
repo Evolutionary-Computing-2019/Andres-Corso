@@ -17,7 +17,7 @@ public class SETournament<T> implements Selection<T> {
         // For each place in the tournament get a random individual
         for (int i = 0; i < tournamentSize; i++) {
             int randomId = (int) (Math.random() * pop.length);
-            tournament[i] = pop[i];
+            tournament[i] = pop[randomId];
             //System.out.println(tournament.getIndividual(i).toString()+"-"+tournament.getIndividual(i).getFitness());
         }
         float nParticipants = (int)(tournamentSize/2);

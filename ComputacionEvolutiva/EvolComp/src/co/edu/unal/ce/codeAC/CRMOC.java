@@ -7,8 +7,8 @@ public class CRMOC implements Crossover<Integer[]> {
     }
 
     @Override
-    public Integer[][] apply(Integer[][] parents) {
-        int n = parents[0].length;
+    public Integer[][] apply(Individual<Integer[]>[] parents) {
+        int n = parents[0].x().length;
         Integer[] ic0 = new Integer[m];
         Integer[] ic1 = new Integer[m];
         Integer[][] children = new Integer[2][n];
@@ -18,28 +18,28 @@ public class CRMOC implements Crossover<Integer[]> {
             do{
                 i0 = (int) (Math.random() * n - 1);
             }while (inArray(ic0,i0));
-            children[0][i0] = parents[0][i0];
+            children[0][i0] = parents[0].x()[i0];
             do{
                 i0 = (int) (Math.random() * n - 1);
             }while (inArray(ic1,i0));
-            children[1][i0] = parents[1][i0];
+            children[1][i0] = parents[1].x()[i0];
         }
         int j = (int) (Math.random() * n - 1);
         for (int k = 0; k < n; k++) {
             if (!( inArray(ic0,k))) {
-                while (inArray(children[0], parents[1][j])) {
+                while (inArray(children[0], parents[1].x()[j])) {
                     j = (j + 1) % n;
                 }
-                children[0][k] = parents[1][j];
+                children[0][k] = parents[1].x()[j];
             }
         }
         j = (int) (Math.random() * n - 1);
         for (int k = 0; k < n; k++) {
             if (!( inArray(ic1,k))) {
-                while (inArray(children[1], parents[0][j])) {
+                while (inArray(children[1], parents[0].x()[j])) {
                     j = (j + 1) % n;
                 }
-                children[1][k] = parents[0][j];
+                children[1][k] = parents[0].x()[j];
             }
         }
         return children;

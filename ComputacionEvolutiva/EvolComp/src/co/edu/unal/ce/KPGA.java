@@ -51,6 +51,8 @@ public class KPGA {
         String file;
         //file = "input/instances_KP/large_scale/knapPI_1_100_1000_1";
         file = "input/instances_KP/large_scale/knapPI_1_200_1000_1";
+        file = "input/instances_KP/large_scale/knapPI_1_1000_1000_1";
+
 
 
         Function<Boolean[]> f = new FUKP(file);
@@ -58,7 +60,8 @@ public class KPGA {
         Mutation<Boolean[]> m = new MUBinary();
         Crossover<Boolean[]> c = new CRBinary();
         Space<Boolean[]> e = new SPBinary(1.0/f.getSize(), f.getSize());
-        Replace<Boolean[]> r = new REHIllClimbing<Boolean[]>();
+        Replace<Boolean[]> r = new REBestPop1vsCh1<Boolean[]>();
+        //Replace<Boolean[]> r = new REGenerational<>();
         Selection<Boolean[]> s = new SETournament<Boolean[]>(4,2.0/3.0);
         ALGPopulationBased<Boolean[]> ac = new ALGPopulationBased<Boolean[]>(r, e, f, s, c, m);
         Individual<Boolean[]> x = ac.apply(nInd, iterations);
